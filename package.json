@@ -1,0 +1,36 @@
+{
+  "name": "dsh-agentmcp",
+  "version": "0.3.0",
+  "description": "AgentMCP bridge for DeepSeek Harness: connects to the Minecraft AgentMCP server (POST-only JSON-RPC 2.0) and dynamically registers all its game-control tools, plus a sidebar console with a searchable tool catalog, HUD task-list editor and connection diagnostics",
+  "type": "module",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "test",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}

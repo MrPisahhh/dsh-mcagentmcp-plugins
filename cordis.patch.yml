@@ -1,0 +1,19 @@
+# dsh-agentmcp 的 bundle patch —— 把插件挂进 DSH 配置树。
+#
+# 安装器会读 package.json 的 dsh.bundle.patch，把下面的 insert 行插进 profile 的层栈。
+# 手工安装时也可以把这段追加到 ~/.dsh/profiles/<profile>/cordis.patch.yml 末尾。
+#
+# config 可覆盖 lib/index.js 的 DEFAULTS：
+#   serverName         工具名前缀，默认 agentmcp（决定 mcp__agentmcp__*）
+#   url                MCP 端点，默认 http://127.0.0.1:25566/mcp
+#   authToken          与模组 config/agentmcp.json 的 authToken 一致；为空表示不鉴权
+#   toolCallTimeoutMs  单次调用超时，≤ 95000（服务端硬上限 95 秒）
+#   autoStart          DSH 启动时自动连接，默认 true
+#   statePath          运行期覆盖项位置，默认 ~/.dsh/agentmcp/bridge.json
+#
+# 运行期覆盖项（面板「配置」里改的）存在 statePath，
+# 优先级高于这里的 config；两者都不改 Java 端。
+- insert:
+    - id: agentmcp
+      name: dsh-agentmcp
+      config: {}
